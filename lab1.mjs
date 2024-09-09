@@ -1,8 +1,8 @@
 'use strict';
-/**
- * Reflection question 1
- * your answer goes here
- */
+
+//Reflection question 1
+console.log( 'Reflection question 1:' + '\n' + 'This is because in js a undefined variable will count as null in any boolean situation');
+
 
 import inventory from './inventory.mjs';
 console.log('\n=== beginning of printout ================================')
@@ -18,9 +18,10 @@ console.log('\n--- for ... in ---------------------------------------')
 for (const name in inventory) {
   console.log(name);
 }
-/**
- * Reflection question 2
- */
+
+//Reflection question 2
+console.log( 'Reflection question 2:' + '\n' + 'The two different xamples will give different outputs if the inventory have any inherited properties from the prototype. In that case for ... in will include all inherited properties while for each only will include own properties');
+
 
 console.log('\n--- Assignment 1 ---------------------------------------')
 
