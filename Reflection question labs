@@ -1,0 +1,22 @@
+Reflection question 1:
+In most programming languages a complete record for each 
+ingredient would be used, for example: Sallad: {price: 10, foundation: true, protein: false, 
+extra: false, dressing: false, vegan: true, gluten: false, lactose: false} This
+is not the case in inventory, which is common when writing JavaScript code. Why don’t we
+need to store properties with the value false in the JavaScript objects?
+
+Answer question 1:
+
+Reflection question 2: When will the two examples above give different outputs, and why
+is inherited functions, such as forEach(), not printed? Hint: read about enumerable
+properties and own properties.
+
+Answer question 2:
+
+Reflection question 3: 
+How are classes and inherited properties represented in JavaScript?
+Let’s explore this by checking some types. What is the type and value of: Salad,
+Salad.prototype, Salad.prototype.prototype, myCaesarSalad and myCaesarSalad.prototype?
+Hint: console.log(’typeof Salad: ’ + typeof Salad);
+
+Answer question 3:
