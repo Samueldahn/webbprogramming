@@ -40,7 +40,7 @@ console.log(makeOptions(inventory, 'foundation'));
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
   constructor(salad) { 
-    if(arguments.length>0){
+    if(salad){
       this.ingredients = {...salad.ingredients};
     }else{
       this.ingredients = {};
@@ -81,8 +81,33 @@ class Salad {
   }
 }
 
+class GourmetSalad extends Salad{
+  constructor(salad) {
+    super(salad);
+  }
+
+  add(name, properties, size = 1) {
+    if (!this.ingredients[name]) {
+      // If the ingredient is not present, add it with the initial size
+      let tempProps = {...properties};
+      tempProps.size = size;
+      super.add(name, tempProps);
+    } else {
+      // If the ingredient is already present, update its size and properties
+      let existing = this.ingredients[name];
+      existing.size = (existing.size || 1) + size;
+      Object.assign(existing, properties);  // Update properties
+    }
+    return this;
+  }
+}
+
 Salad.prototype.getPrice = function() {
   return Object.values(this.ingredients).reduce((sum, entry) => sum + entry.price,0);
+};
+
+GourmetSalad.prototype.getPrice = function() {
+  return Object.values(this.ingredients).reduce((sum, entry) => sum + (entry.price * (entry.size || 1)),0);
 };
 
 Salad.prototype.count = function(prop) {
@@ -164,7 +189,7 @@ console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
 console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
 
 console.log('\n--- Assignment 5 ---------------------------------------')
-/*
+
 let myGourmetSalad = new GourmetSalad()
   .add('Sallad', inventory['Sallad'], 0.5)
   .add('Kycklingfilé', inventory['Kycklingfilé'], 2)
@@ -175,7 +200,7 @@ let myGourmetSalad = new GourmetSalad()
 console.log('Min gourmetsallad med lite bacon kostar ' + myGourmetSalad.getPrice() + ' kr');
 myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
-*/
+
 console.log('\n--- Assignment 6 ---------------------------------------')
 /*
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
