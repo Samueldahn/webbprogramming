@@ -50,6 +50,14 @@ class Salad {
   }
 }
 
+Salad.prototype.getPrice = function() {
+  return Object.values(this.ingredients).reduce((sum, entry) => sum + entry.price,0);
+};
+
+Salad.prototype.count = function(prop) {
+  return Object.values(this.ingredients).reduce((sum, entry) => entry[prop] ? sum + 1 : sum,0);
+};
+
 let myCaesarSalad = new Salad()
   .add('Sallad', inventory['Sallad'])
   .add('Kycklingfilé', inventory['Kycklingfilé'])
@@ -63,24 +71,49 @@ myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 
 console.log('\n--- Assignment 3 ---------------------------------------')
-//console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
-// En ceasarsallad kostar 45kr
-//console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
-// En ceasarsallad har 2 ingredienser med laktos
-//console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
-// En ceasarsallad har 3 tillbehör
+console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
+//En ceasarsallad kostar 45kr
+console.log('En ceasarsallad har ' + myCaesarSalad.count('lactose') + ' ingredienser med laktos');
+//En ceasarsallad har 2 ingredienser med laktos
+console.log('En ceasarsallad har ' + myCaesarSalad.count('extra') + ' tillbehör');
+//En ceasarsallad har 3 tillbehör
 
-/*
-console.log('\n--- reflection question 3 ---------------------------------------')
-console.log('typeof Salad: ' + typeof Salad);
-console.log('typeof Salad.prototype: ' + typeof Salad.prototype);
-console.log('typeof Salad.prototype.prototype: ' + typeof Salad.prototype.prototype);
-console.log('typeof myCaesarSalad: ' + typeof myCaesarSalad);
-console.log('typeof myCaesarSalad.prototype: ' + typeof myCaesarSalad.prototype);
-console.log('check 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
+
+console.log('\n--- reflection question 3 ---------------------------------------');
+console.log('\nSalad');
+console.log('Type: ' + typeof Salad);
+console.log('Value: ' + Salad);
+
+console.log('\nSalad.prototype');
+console.log('Type: ' + typeof Salad.prototype);
+console.log('Value: ' + Salad.prototype);
+
+console.log('\nSalad.prototype.prototype');
+console.log('Type: ' + typeof Salad.prototype.prototype);
+console.log('Value: ' + Salad.prototype.prototype);
+
+console.log('\nmyCaesarSalad');
+console.log('Type: ' + typeof myCaesarSalad);
+console.log('Value: ' + myCaesarSalad);
+
+console.log('\nmyCaesarSalad.prototype');
+console.log('Type: ' + typeof myCaesarSalad.prototype);
+console.log('Value: ' + myCaesarSalad.prototype);
+
+console.log('\ncheck 1: ' + (Salad.prototype === Object.getPrototypeOf(Salad)));
 console.log('check 2: ' + (Salad.prototype === Object.getPrototypeOf(myCaesarSalad)));
 console.log('check 3: ' + (Object.prototype === Object.getPrototypeOf(Salad.prototype)));
-*/
+
+console.log('\nHow are classes and inherited properties represented in JavaScript?');
+console.log('Through the prototype chain.');
+console.log('\nWhat is the difference between an object’s prototype chain and having a prototype property?');
+console.log('Each constructor has a prototype property if not at the end of the prototype chain. This property connects the prototype chain.');
+console.log('\nWhich objects have a prototype property?');
+console.log('Constructor functions and classes.');
+console.log('\nHow do you get the next object in the prototype chain?');
+console.log('.prototype');
+
+
 console.log('\n--- Assignment 4 ---------------------------------------')
 /*
 const singleText = JSON.stringify(myCaesarSalad);
