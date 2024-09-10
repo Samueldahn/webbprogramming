@@ -43,8 +43,6 @@ console.log(makeOptions(inventory, 'foundation'));
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
   static instanceCounter = 1;
-  id;
-  uuid;
 
   constructor(salad) { 
     if(salad){
@@ -92,7 +90,7 @@ class Salad {
     Salad.instanceCounter--;
     result.id = id;
     result.uuid = uuid;
-    Object.entries(tempIngredients).forEach(([key, value]) => result.add(key, value));
+    result.ingredients = tempIngredients;
     return result;
   }
 }
@@ -110,9 +108,9 @@ class GourmetSalad extends Salad{
       super.add(name, tempProps);
     } else {
       // If the ingredient is already present, update its size and properties
-      let existing = this.ingredients[name];
+      let existing = {...this.ingredients[name]};
       existing.size = (existing.size || 1) + size;
-      Object.assign(existing, properties);  // Update properties
+      super.add(name, existing);  // Update properties
     }
     return this;
   }
