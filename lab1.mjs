@@ -31,9 +31,6 @@ function makeOptions(inv, prop) {
   return invArray
   .filter(([key, entry]) => entry[prop] === true) // Check if the property exists and is true
   .map(([key, entry]) => ({ [key]: entry }));
-  // return Object.keys(inv)
-  //   .filter(key => inv[key].prop)
-  //   .map(key => ({name: key, ...inv[key]}));
 }
 
 console.log(makeOptions(inventory, 'foundation'));
