@@ -39,8 +39,12 @@ console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  constructor() { 
-    this.ingredients = {};
+  constructor(salad) { 
+    if(arguments.length>0){
+      this.ingredients = {...salad.ingredients};
+    }else{
+      this.ingredients = {};
+    }
   }
   add(name, properties) {
     this.ingredients[name] = properties;
@@ -49,6 +53,31 @@ class Salad {
   remove(name) {
     delete this.ingredients[name];
     return this;
+  }
+
+  static parse(json) {
+    // Parse the JSON string into an object
+    let parsedData = JSON.parse(json);
+
+    if (Array.isArray(parsedData)) {
+      // If it's an array of salads, parse each one and combine them
+      let arrayOfSalads = new Array();
+      parsedData.forEach(item => {
+        let tempIngredients = item.ingredients;
+        arrayOfSalads.push(Salad.parseHelp(tempIngredients));
+      });
+      return arrayOfSalads;
+    } else {
+      // If it's a single salad object, parse it directly
+      let tempIngredients = parsedData.ingredients;
+      return Salad.parseHelp(tempIngredients);
+    }
+  }
+
+  static parseHelp(tempIngredients) {
+    let result = new Salad();
+    Object.entries(tempIngredients).forEach(([key, value]) => result.add(key, value));
+    return result;
   }
 }
 
@@ -117,7 +146,7 @@ console.log('.prototype');
 
 
 console.log('\n--- Assignment 4 ---------------------------------------')
-/*
+
 const singleText = JSON.stringify(myCaesarSalad);
 const arrayText = JSON.stringify([myCaesarSalad, myCaesarSalad]);
 
@@ -133,7 +162,7 @@ console.log('Salad.parse(arrayText)\n' + JSON.stringify(arrayCopy));
 singleCopy.add('Gurka', inventory['Gurka']);
 console.log('originalet kostar ' + myCaesarSalad.getPrice() + ' kr');
 console.log('kopian med gurka kostar ' + singleCopy.getPrice() + ' kr');
-*/
+
 console.log('\n--- Assignment 5 ---------------------------------------')
 /*
 let myGourmetSalad = new GourmetSalad()
@@ -153,12 +182,9 @@ console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
 console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
 */
 
-/**
- * Reflection question 4
- */
-/**
- * Reflection question 5
- */
-/**
- * Reflection question 6
- */
+
+//console.log('\n--- reflection question 4 ---------------------------------------');
+
+//console.log('\n--- reflection question 5 ---------------------------------------');
+
+//console.log('\n--- reflection question 6 ---------------------------------------');
