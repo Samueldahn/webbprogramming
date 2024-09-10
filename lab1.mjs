@@ -30,24 +30,26 @@ function makeOptions(inv, prop) {
 
   return invArray
   .filter(([key, entry]) => entry[prop] === true) // Check if the property exists and is true
-  .map(([key, entry]) => ({ [key]: entry }));
+  .map(([key, entry]) => `<option value="${key}" key="${key}">${key}, ${entry.price} kr</option>`);
 }
 
 console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
-  constructor() {
-
+  constructor() { 
+    this.ingredients = {};
   }
   add(name, properties) {
-
+    this.ingredients[name] = properties;
+    return this;
   }
   remove(name) {
-    
+    delete this.ingredients[name];
+    return this;
   }
 }
-/*
+
 let myCaesarSalad = new Salad()
   .add('Sallad', inventory['Sallad'])
   .add('Kycklingfilé', inventory['Kycklingfilé'])
@@ -59,7 +61,7 @@ let myCaesarSalad = new Salad()
 console.log(JSON.stringify(myCaesarSalad) + '\n');
 myCaesarSalad.remove('Gurka');
 console.log(JSON.stringify(myCaesarSalad) + '\n');
-*/
+
 console.log('\n--- Assignment 3 ---------------------------------------')
 //console.log('En ceasarsallad kostar ' + myCaesarSalad.getPrice() + 'kr');
 // En ceasarsallad kostar 45kr
