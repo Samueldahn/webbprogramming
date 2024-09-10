@@ -2,10 +2,12 @@
 
 //Reflection question 1
 console.log('\n--- reflection question 1 ---------------------------------------');
-console.log('\nThis is because in js a undefined variable will count as null in any boolean situation');
+console.log('Why don’t we need to store properties with the value false in the JavaScript objects?');
+console.log('\nThis is because in js a undefined variable will count as false in any boolean situation');
 
 
 import inventory from './inventory.mjs';
+import { v4 as uuidv4 } from 'uuid';
 console.log('\n=== beginning of printout ================================')
 console.log('inventory:', inventory);
 
@@ -21,7 +23,8 @@ for (const name in inventory) {
 }
 
 //Reflection question 2
-console.log('\n--- reflection question 1 ---------------------------------------');
+console.log('\n--- reflection question 2 ---------------------------------------');
+console.log('When will the two examples above give different outputs, and why is inherited functions, such as forEach(), not printed?');
 console.log('\nThe two different xamples will give different outputs if the inventory have any inherited properties from the prototype. In that case for ... in will include all inherited properties while for each only will include own properties');
 
 
@@ -39,12 +42,19 @@ console.log(makeOptions(inventory, 'foundation'));
 
 console.log('\n--- Assignment 2 ---------------------------------------')
 class Salad {
+  static instanceCounter = 1;
+  id;
+  uuid;
+
   constructor(salad) { 
     if(salad){
       this.ingredients = {...salad.ingredients};
     }else{
       this.ingredients = {};
     }
+    this.id = 'salad_' + Salad.instanceCounter++;
+    this.uuid = uuidv4();
+
   }
   add(name, properties) {
     this.ingredients[name] = properties;
@@ -58,24 +68,30 @@ class Salad {
   static parse(json) {
     // Parse the JSON string into an object
     let parsedData = JSON.parse(json);
-
     if (Array.isArray(parsedData)) {
       // If it's an array of salads, parse each one and combine them
       let arrayOfSalads = new Array();
       parsedData.forEach(item => {
         let tempIngredients = item.ingredients;
-        arrayOfSalads.push(Salad.parseHelp(tempIngredients));
+        let id = item.id;
+        let uuid = item.uuid;
+        arrayOfSalads.push(Salad.parseHelp(tempIngredients, id, uuid));
       });
       return arrayOfSalads;
     } else {
       // If it's a single salad object, parse it directly
       let tempIngredients = parsedData.ingredients;
-      return Salad.parseHelp(tempIngredients);
+      let id = parsedData.id;
+      let uuid = parsedData.uuid;
+      return Salad.parseHelp(tempIngredients, id, uuid);
     }
   }
 
-  static parseHelp(tempIngredients) {
+  static parseHelp(tempIngredients, id, uuid) {
     let result = new Salad();
+    Salad.instanceCounter--;
+    result.id = id;
+    result.uuid = uuid;
     Object.entries(tempIngredients).forEach(([key, value]) => result.add(key, value));
     return result;
   }
@@ -202,14 +218,41 @@ myGourmetSalad.add('Bacon', inventory['Bacon'], 1)
 console.log('Med extra bacon kostar den ' + myGourmetSalad.getPrice() + ' kr');
 
 console.log('\n--- Assignment 6 ---------------------------------------')
-/*
+
 console.log('Min gourmetsallad har id: ' + myGourmetSalad.id);
 console.log('Min gourmetsallad har uuid: ' + myGourmetSalad.uuid);
-*/
 
 
-//console.log('\n--- reflection question 4 ---------------------------------------');
 
-//console.log('\n--- reflection question 5 ---------------------------------------');
+console.log('\n--- reflection question 4 ---------------------------------------');
+console.log('In which object are static properties stored?');
+console.log('In the class itself. In this case Salad.xx');
 
-//console.log('\n--- reflection question 6 ---------------------------------------');
+console.log('\n--- reflection question 5 ---------------------------------------');
+console.log('Can you make the id property read only?');
+console.log('Yes, by defining the property of id "writable" to false. Not recommended during lectures.');
+
+
+console.log('\n--- reflection question 6 ---------------------------------------');
+console.log('Can properties be private?');
+console.log('Yes by using # in the beginning of name of property name');
+
+console.log('\n--- Assignment 7 ---------------------------------------')
+console.log('The below printout is a check that creating salad through parse keeps the id and uuid the same.')
+
+
+let myCaesarSalad2 = new Salad()
+  .add('Sallad', inventory['Sallad'])
+  .add('Kycklingfilé', inventory['Kycklingfilé'])
+  .add('Bacon', inventory['Bacon'])
+  .add('Krutonger', inventory['Krutonger'])
+  .add('Parmesan', inventory['Parmesan'])
+  .add('Ceasardressing', inventory['Ceasardressing'])
+  .add('Gurka', inventory['Gurka']);
+let stringSalad = JSON.stringify(myCaesarSalad2);
+console.log(stringSalad + '\n');
+let myCaesarSalad2Copy = Salad.parse(stringSalad);
+console.log(JSON.stringify(myCaesarSalad2Copy) + '\n');
+
+let myCaesarSalad3 = new Salad();
+console.log(JSON.stringify(myCaesarSalad3));
