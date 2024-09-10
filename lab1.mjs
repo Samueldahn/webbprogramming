@@ -26,7 +26,14 @@ console.log( 'Reflection question 2:' + '\n' + 'The two different xamples will g
 console.log('\n--- Assignment 1 ---------------------------------------')
 
 function makeOptions(inv, prop) {
-  return 'TODO';
+  let invArray = Object.entries(inv); // Convert object to array
+
+  return invArray
+  .filter(([key, entry]) => entry[prop] === true) // Check if the property exists and is true
+  .map(([key, entry]) => ({ [key]: entry }));
+  // return Object.keys(inv)
+  //   .filter(key => inv[key].prop)
+  //   .map(key => ({name: key, ...inv[key]}));
 }
 
 console.log(makeOptions(inventory, 'foundation'));
