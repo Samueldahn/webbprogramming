@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(78, 184, 230);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(62, 17, 152);
+    }
+
+fieldset {
+    border-radius: 15px;
+    border-width: 1px;
+}
+
+#button {
+    margin: 5px;
+    font-size: large;
+    border-width: 3px;
+    border-radius: 5px;
+    float: inline-end;
+}
