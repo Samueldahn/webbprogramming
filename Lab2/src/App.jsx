@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import inventory from './inventory.mjs';
+import ComposeSalad from './ComposeSalad';
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  let extras = Object.keys(inventory).filter(name => inventory[name].extra);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container py-4">
+      <header className="pb-3 mb-4 border-bottom">
+        <span className="fs-4">Min egen salladsbar</span>
+      </header>
+
+      <div className="container col-12">
+        <div className="row h-200 p-5 bg-light border rounded-3">
+          <h2>Välj innehållet i din sallad</h2>
+          {extras.map(name => <div key={name} className="col-4">{name}</div>)}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <ComposeSalad inventory={inventory}></ComposeSalad>
+
+      <footer className="pt-3 mt-4 text-muted border-top">
+        EDAF90 - webprogrammering
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
