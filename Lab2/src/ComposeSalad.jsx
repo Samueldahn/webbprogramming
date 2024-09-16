@@ -82,6 +82,26 @@ function ComposeSalad(props) {
     setDressing("Ceasardressing");
     setExtras({});
   };
+
+  const ceasarSallad = (event) => {
+    event.preventDefault();
+
+    setFoundation("Sallad");
+    setProtein("Kycklingfilé");
+    setDressing("Ceasardressing");
+    setExtras({ Bacon: true, Krutonger: true, Parmesan: true, Gurka: true});
+  }
+
+  const resetChoices = (event) => {
+    event.preventDefault();
+
+    setFoundation("Sallad");
+    setProtein("Kycklingfilé");
+    setDressing("Ceasardressing");
+    setExtras({});
+  }
+
+  
   
   return (
     <div className="continer col-12 mb-5">
@@ -118,7 +138,11 @@ function ComposeSalad(props) {
           <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
 
 
-          <input className="mt-4 btn btn-primary" id="order" type="submit" value="Beställ"></input>
+          <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
+          <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Ceasarsallad 50kr" onClick={ceasarSallad}></input>
+          <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Återställ" onClick={resetChoices}></input>
+
+
 
         </form>
 

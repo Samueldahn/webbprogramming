@@ -1,44 +1,35 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
+import ViewOrder from './ViewOrder';
 import { useState } from 'react';
 
 function App() {
-  const [salads, setSalads] = useState([]);
-
-  let extras = Object.keys(inventory).filter(name => inventory[name].extra);
+  const [shoppingCart, setShoppingCart] = useState([]);
 
   const addSalad = (newSalad) => {
-    setSalads((prevSalads) => [...prevSalads, newSalad]);
+    setShoppingCart((prevShoppingCart) => [...prevShoppingCart, newSalad]);
   };
 
-  function getSalads() {
-    if (salads.length === 0) {
-      return <p>No salads in the cart.</p>;
-    }
-
-    return salads.map((salad, index) => {
-      const ingredients = Object.keys(salad.ingredients).join(', ');
-      const price = salad.getPrice();
-      return (
-        <div className="mb-3 fs-10 border centered rounded bg-white " key={index}>
-          <p>{ingredients + ", pris: " + price + "kr"}</p>
-        </div>
-      );
-    });
-  }
+  const emptyShoppingCart = (event) => {
+    event.preventDefault();
+    setShoppingCart([]);
+  };
 
 
   return (
     <div className="container py-4" >
       <header className="pb-3 mb-4 border-bottom">
-        <span className="fs-4">Chill och snabbt</span>
+        <img style={{ width: '100px', height: '100px'}} src="https://www.grontogott.se/wp-content/uploads/2020/07/cropped-logo.png" alt="Chill och snabbt logo"/>
+        <span className="fs-1 align-middle">Chill och snabbt</span>
       </header>
 
       <div className="container col-12 mb-5">
           <div className="row h-200 p-5 bg-light border rounded-3">
             <h2>Varukorgen</h2>
-            {getSalads()}
+            <ViewOrder shoppingCart={shoppingCart}></ViewOrder>
+            <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={emptyShoppingCart}></input>
+
           </div>
       </div>
       
