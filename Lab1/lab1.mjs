@@ -254,3 +254,5 @@ console.log(JSON.stringify(myCaesarSalad2Copy) + '\n');
 
 let myCaesarSalad3 = new Salad();
 console.log(JSON.stringify(myCaesarSalad3));
+
+export default Salad;

@@ -1,0 +1,73 @@
+Reflection question 1 ----------------------------------------------------------
+Q: 
+The render function must be a pure function of props and the component state, the 
+values returned by useState(). What happens if the output of the render function is 
+depending on other data that changes over time?
+
+A: 
+This is not nessicerily detrimental for all situations. As long as external variables
+remain the same - no change. However, if the variables change it could lead to:
+1. The UI rendering incorrectly (too wide etc). 
+2. Since the rendering depends on changes in props and state, if other variables 
+change - the UI would not update and be out of sync.
+3. Potentially, it could lead to bugs as we don't know how react would handle this.
+
+Reflection question 2 ----------------------------------------------------------
+Q:
+In the code above, the foundations array is computed every time the component is 
+rendered. The inventory changes very infrequent so you might think this is 
+inefficient. Can you cache foundations so it is only computed when props.inventory 
+changes? Hint, read about the second parameter to useEffect, 
+“Learn React”/“EscapeHatches”/“Synchronizing with Effects”, 
+https://react.dev/learn/synchronizing-with-effects. Is it a good idea?
+
+A:
+Part 1:
+Yes you can through using useEffect, with the code for calculating foundations 
+inside of the useEffect function (which will be called after each render).
+You would put [props.inventory] in the "end" of the return.
+
+Part 2:
+It does not seem to be nessecary as it can be inefficient. React can do double
+the work as it updates it after state update and after render, potentially
+restarting the process as well. FRÅGA PÅ LABB!!
+
+Reflection question 3 ----------------------------------------------------------
+Q:
+Should you move the foundation state to the Select component
+above? To answer this you need to consider what happens when the user submits the
+form.
+
+A:
+We do not understand the question. FRÅGA PÅ LABB!!
+
+Reflection question 4 ----------------------------------------------------------
+Q:
+What triggers react to call the render function and update the DOM?
+
+A:
+1. State changes
+2. props changes
+3. Other reasons might be forceUpdate calls or others?
+
+Reflection question 5 ----------------------------------------------------------
+Q:
+When the user change the html form state (DOM), does this change
+the state of your component?
+
+A:
+No. It does not change the state of the component unless you have event handelers.
+
+Reflection question 6 ----------------------------------------------------------
+Q:
+What is the value of this in the event handling call-back functions?
+
+A:
+this in event handeling call-back functions will be event.currentTarget
+
+Reflection question 7 ----------------------------------------------------------
+Q:
+How is the prototype chain affected when copying an object with copy = {...sourceObject}?
+
+A:
+The prototype chain is "emptied" and a new one is created for the copy.
