@@ -10,12 +10,12 @@ function App() {
         <span className="fs-4">Min egen salladsbar</span>
       </header>
 
-      <div className="container col-12">
+      {/* <div className="container col-12">
         <div className="row h-200 p-5 bg-light border rounded-3">
           <h2>Välj innehållet i din sallad</h2>
           {extras.map(name => <div key={name} className="col-4">{name}</div>)}
         </div>
-      </div>
+      </div> */}
 
       <ComposeSalad inventory={inventory}></ComposeSalad>
 
