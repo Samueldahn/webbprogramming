@@ -1,23 +1,29 @@
+import { useId } from 'react';
 import { useState } from 'react';
+import Salad from './Salad.mjs';
+
+
 
 function ComposeSalad(props) {
-  const inventory = Object.keys(props.inventory);
+  const inventoryKeys = Object.keys(props.inventory);
+  // const inventory = Object.entries(props.inventory);
 
-  const foundationList = inventory.filter(name => props.inventory[name].foundation).map(item => (
+
+  const foundationList = inventoryKeys.filter(name => props.inventory[name].foundation).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
   ));
 
-  const proteinList = inventory.filter(name => props.inventory[name].protein).map(item => (
+  const proteinList = inventoryKeys.filter(name => props.inventory[name].protein).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
   ));
 
-  const extraList = inventory.filter(name => props.inventory[name].extra)
+  const extraList = inventoryKeys.filter(name => props.inventory[name].extra)
 
-  const dressingList = inventory.filter(name => props.inventory[name].dressing).map(item => (
+  const dressingList = inventoryKeys.filter(name => props.inventory[name].dressing).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
@@ -48,39 +54,45 @@ function ComposeSalad(props) {
   };
 
   function Select({ label, value, onChange, options }) {
+    const id = useId();
     return (
       <div className="mb-3">
-        <label className="form-label">{label}</label>
-        <select value={value} onChange={onChange} className="form-select">
+        <label htmlFor={id} className="form-label">{label}</label>
+        <select value={value} onChange={onChange} className="form-select" id={id}>
           {options}
         </select>
       </div>
     );
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let mySalad = new Salad()
+      .add(foundation, props.inventory[foundation])
+      .add(protein, props.inventory[protein])
+      .add(dressing, props.inventory[dressing]);
+
+    Object.keys(extras).forEach(name => mySalad.add(name, props.inventory[name]));
+    
+    props.onSubmit(mySalad);
+
+    setFoundation("Sallad");
+    setProtein("Kycklingfilé");
+    setDressing("Ceasardressing");
+    setExtras({});
+  };
   
   return (
-    <div className="continer col-12">
-    <div className="row h-200 p-5 bg-light border rounded-3">
-    <h2>Varukorgen</h2>
-      <div>
-
-      </div>
-    </div>
-
+    <div className="continer col-12 mb-5">
+    
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
-        <form className="col-md-12">
+        <form className="col-md-12" onSubmit={handleSubmit}>
 
           <Select label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
           
           <Select label="Välj protein" value={protein} onChange={handleProteinChange} options={proteinList}/>
-
-          {/* <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/> */}
-
-          {/* <label htmlFor="protein" className="form-label">Välj protein</label>
-          <select value={protein} onChange={handleProteinChange} className="form-select" id="protein">
-            {proteinList}
-          </select> */}
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
@@ -103,10 +115,8 @@ function ComposeSalad(props) {
             </div>
           </div>
 
-          <label htmlFor="dressing" className="form-label">Välj dressing</label>
-          <select value={dressing} onChange={handleDressingChange} className="form-select" id="dressing">
-            {dressingList}
-          </select>
+          <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
+
 
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Beställ"></input>
 
