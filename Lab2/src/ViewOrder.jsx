@@ -11,7 +11,7 @@ function ViewOrder(props) {
       const ingredients = Object.keys(salad.ingredients).join(', ');
       const price = salad.getPrice();
       return (
-        <div className="mb-3 fs-10 border centered rounded bg-white " key={uuidv4()}>
+        <div className="mb-3 fs-10 border centered rounded bg-white " key={salad.uuid}>
           <p>{ingredients + ", pris: " + price + "kr"}</p>
         </div>
       );

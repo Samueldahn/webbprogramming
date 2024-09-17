@@ -53,7 +53,7 @@ function ComposeSalad(props) {
     setDressing(event.target?.value); 
   };
 
-  function Select({ label, value, onChange, options }) {
+  function Select({ label, value, onChange, options }) { //denna ska läggas separat i en annan fil och passa allt som props
     const id = useId();
     return (
       <div className="mb-3">
