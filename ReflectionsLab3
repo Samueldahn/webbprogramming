@@ -1,21 +1,20 @@
 Reflection question 1 ----------------------------------------------------------
-Q:
+Q: What is the difference between using <Link> and <NavLink> in yournavigation bar?
+
+A: With NavLink the user can see on what side of the page they are right now. Which is not possible with Link
 
 
-A:
+Reflection question 2 ----------------------------------------------------------
+Q: What happens if the user writes an invalid uuid in the url?
+
+A: Det skapar en ny view-order komponent när ett felaktigt uuid skrivs in som skriver över det gamla så det inte längre går att nå
+ // Hur förhindrar man detta?
 
 
-Reflection question 1 ----------------------------------------------------------
-Q:
+Reflection question 3 ----------------------------------------------------------
+Q: What is the meaning of a leading / in a path, the difference between
+navigate("view-order/confirm/123e4567-e89b-12d3-a456-426614174000") and
+navigate("/view-order/confirm/123e4567-e89b-12d3-a456-426614174000").
 
-
-A:
-
-
-Reflection question 1 ----------------------------------------------------------
-Q:
-
-
-A:
-
-
+A: Om det är en relativ eller en absolut URL. Det vill säga om det inleds med "/" är det en absolut adress och den läggs på
+ roten av adressen. Börjar den däremot utan "/" kommer andressen bygga på den befintliga andressen.
