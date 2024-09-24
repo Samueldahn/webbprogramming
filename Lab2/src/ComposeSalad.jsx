@@ -1,13 +1,13 @@
 import { useId } from 'react';
 import { useState } from 'react';
 import Salad from './Salad.mjs';
-
+import { useOutletContext } from 'react-router-dom';
 
 
 function ComposeSalad(props) {
   const inventoryKeys = Object.keys(props.inventory);
+  const { inventory, addSalad } = useOutletContext();
   // const inventory = Object.entries(props.inventory);
-
 
   const foundationList = inventoryKeys.filter(name => props.inventory[name].foundation).map(item => (
     <option key={item} value={item}>
@@ -93,7 +93,6 @@ function ComposeSalad(props) {
      setTouched("");
     }
 
-    
   };
 
   const ceasarSallad = (event) => {
@@ -152,8 +151,6 @@ function ComposeSalad(props) {
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
           <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Ceasarsallad 50kr" onClick={ceasarSallad}></input>
           <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Återställ" onClick={resetChoices}></input>
-
-
 
         </form>
 

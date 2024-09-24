@@ -11,7 +11,7 @@ const router = createBrowserRouter([
         Component: ComposeSalad,
       }, {
         index: true,
-        element: <p>Welcome to my Chill och Snabbt</p>
+        element: <p>Welcome to Chill och Snabbt</p>
       }]
   },
 ]);

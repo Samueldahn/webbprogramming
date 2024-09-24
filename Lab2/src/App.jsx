@@ -3,6 +3,7 @@ import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
 import ViewOrder from './ViewOrder';
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -24,18 +25,11 @@ function App() {
         <span className="fs-1 align-middle">Chill och snabbt</span>
       </header>
 
-      {/* <div className="container col-12 mb-5">
-          <div className="row h-200 p-5 bg-light border rounded-3">
-            <h2>Varukorgen</h2>
-            <ViewOrder shoppingCart={shoppingCart}></ViewOrder>
-            <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={emptyShoppingCart}></input>
-
-          </div>
-      </div> */}
+      <Outlet context={{ inventory, addSalad, shoppingCart }} />
       
-      <ViewOrder shoppingCart={shoppingCart}></ViewOrder>
+      {/* <ViewOrder shoppingCart={shoppingCart} emptyShoppingCart={emptyShoppingCart}></ViewOrder>
 
-      <ComposeSalad inventory={inventory} onSubmit={addSalad}></ComposeSalad>
+      <ComposeSalad inventory={inventory} onSubmit={addSalad} ></ComposeSalad> */}
 
       <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering
