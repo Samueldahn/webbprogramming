@@ -36,7 +36,7 @@ function ComposeSalad(props) {
   const [dressing, setDressing] = useState("");
   const [extras, setExtras] = useState({});
   const [touched, setTouched] = useState(false);
-  const [extrasOk, setExtrasOk] = useState(false);
+  const [extraCount, setExtraCount] = useState(0);
 
   const handleFoundationChange = (event) => {
     setFoundation(event.target?.value); 
@@ -51,6 +51,8 @@ function ComposeSalad(props) {
       ...prevExtras,
       [event.target.name]: event.target.checked // Update the state of the selected extra
     }));
+
+    setExtraCount(prevCount => event.target.checked ? prevCount + 1 : prevCount - 1);
   };
 
   const handleDressingChange = (event) => {
@@ -77,27 +79,15 @@ function ComposeSalad(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     setTouched(true);
 
-
-
-    console.log("innan");
-    
-    const selectedExtrasCount = Object.values(extras).filter(Boolean).length;
-
-    if(selectedExtrasCount >= 10 || selectedExtrasCount <= 2 ){
-      console.log("inuti");
-      console.log(extrasOk);
-      return;
+    if (extraCount < 3 || extraCount > 9) {
+      return; 
     }
-
-    setExtrasOk(true);
-
 
     console.log("efter");
 
-    if(event.target.checkValidity() && extrasOk){
+    if(event.target.checkValidity()){
        let mySalad = new Salad()
        .add(foundation, inventory[foundation])
        .add(protein, inventory[protein])
@@ -111,7 +101,7 @@ function ComposeSalad(props) {
      setProtein("");
      setDressing("");
      setExtras({});
-
+     setExtraCount(0);
      setTouched("");
 
      navigate("/view-order/confirm/" + mySalad.uuid);
@@ -125,6 +115,7 @@ function ComposeSalad(props) {
     setFoundation("Sallad");
     setProtein("Kycklingfilé");
     setDressing("Ceasardressing");
+    setExtraCount(4);
     setExtras({ Bacon: true, Krutonger: true, Parmesan: true, Gurka: true});
   }
 
@@ -134,6 +125,7 @@ function ComposeSalad(props) {
     setFoundation("");
     setProtein("");
     setDressing("");
+    setExtraCount(0);
     setExtras({});
   }
   
@@ -150,12 +142,12 @@ function ComposeSalad(props) {
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
-            <div className={"row" + (extrasOk ? "was-validated": "is-invalid")}>
+            <div className={`row ${touched && (extraCount >= 3 && extraCount <= 10) ? "was-validated is-valid" : "is-invalid"}`}>
               {extraList.map(extra => (
                 <div key={extra} className="col-12 col-md-4 col-lg-3 mb-2">
                   <input
                     type="checkbox"
-                    className="form-check-input"
+                    className={`form-check-input ${touched && (extraCount < 3 || extraCount > 9) ? "is-invalid" : ""} ${touched && (extraCount >= 3 && extraCount <= 9) ? "is-valid" : ""}`}
                     id={extra}
                     name={extra}
                     checked={extras[extra] || false} // Check if the extra is selected
@@ -168,7 +160,8 @@ function ComposeSalad(props) {
               ))}
             </div>
 
-            
+            <div className="valid-feedback">{touched && (extraCount >= 3 && extraCount <= 9) ? "Korrekt" : ""}</div>
+            <div className="invalid-feedback">{(touched && !(extraCount >= 3 && extraCount <= 9)) ? "Välj minst 3 och max 9 tillbehör" : ""}</div>
 
           </div>
 
