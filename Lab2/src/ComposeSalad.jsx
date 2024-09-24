@@ -33,6 +33,7 @@ function ComposeSalad(props) {
   const [protein, setProtein] = useState("");
   const [dressing, setDressing] = useState("");
   const [extras, setExtras] = useState({});
+  const [touched, setTouched] = useState(false);
 
   const handleFoundationChange = (event) => {
     setFoundation(event.target?.value); 
@@ -53,15 +54,18 @@ function ComposeSalad(props) {
     setDressing(event.target?.value); 
   };
 
+  
   function Select({ label, value, onChange, options }) { //denna ska läggas separat i en annan fil och passa allt som props
     const id = useId();
     return (
       <div className="mb-3">
         <label htmlFor={id} className="form-label">{label}</label>
-        <select value={value} onChange={onChange} className="form-select" id={id}>
+        <select required value={value} onChange={onChange} className="form-select" id={id}>
           <option value="">Gör ditt val</option>
           {options}
         </select>
+        <div className="invalid-feedback">Välj en av ingredienserna</div>
+        <div className="valid-feedback">Korrekt</div>
       </div>
     );
   }
@@ -69,19 +73,27 @@ function ComposeSalad(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let mySalad = new Salad()
-      .add(foundation, props.inventory[foundation])
-      .add(protein, props.inventory[protein])
-      .add(dressing, props.inventory[dressing]);
+    setTouched(true);
 
-    Object.keys(extras).forEach(name => mySalad.add(name, props.inventory[name]));
+    if(event.target.checkValidity()){
+       let mySalad = new Salad()
+       .add(foundation, props.inventory[foundation])
+       .add(protein, props.inventory[protein])
+       .add(dressing, props.inventory[dressing]);
+ 
+     Object.keys(extras).forEach(name => mySalad.add(name, props.inventory[name]));
+     
+     props.onSubmit(mySalad);
+
+     setFoundation("");
+     setProtein("");
+     setDressing("");
+     setExtras({});
+
+     setTouched("");
+    }
+
     
-    props.onSubmit(mySalad);
-
-    setFoundation("Sallad");
-    setProtein("Kycklingfilé");
-    setDressing("Ceasardressing");
-    setExtras({});
   };
 
   const ceasarSallad = (event) => {
@@ -96,24 +108,22 @@ function ComposeSalad(props) {
   const resetChoices = (event) => {
     event.preventDefault();
 
-    setFoundation("Sallad");
-    setProtein("Kycklingfilé");
-    setDressing("Ceasardressing");
+    setFoundation("");
+    setProtein("");
+    setDressing("");
     setExtras({});
   }
-
-  
   
   return (
     <div className="continer col-12 mb-5">
     
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
-        <form className="col-md-12" onSubmit={handleSubmit}>
+        <form noValidate onSubmit={handleSubmit} className={touched ? "was-validated" : ""}>
 
-          <Select required label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
-          
-          <Select required label="Välj protein" value={protein} onChange={handleProteinChange} options={proteinList}/>
+          <Select label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
+
+          <Select label="Välj protein" value={protein} onChange={handleProteinChange} options={proteinList}/>
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
@@ -136,7 +146,7 @@ function ComposeSalad(props) {
             </div>
           </div>
 
-          <Select required label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
+          <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
 
 
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
