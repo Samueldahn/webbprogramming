@@ -10,10 +10,17 @@ const router = createBrowserRouter([
       {
         path: "compose-salad",
         Component: ComposeSalad,
-      }, {
+      },{
         path: "view-order",
         Component: ViewOrder,
-      }, {
+        children: [
+          {
+            path: "confirm/:uuid",
+            Component: ViewOrder,
+          },
+        ],
+
+      },{
         index: true,
         element: <p>Welcome to Chill och Snabbt</p>
       }, {

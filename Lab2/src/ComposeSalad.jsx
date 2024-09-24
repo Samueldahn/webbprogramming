@@ -36,6 +36,7 @@ function ComposeSalad(props) {
   const [dressing, setDressing] = useState("");
   const [extras, setExtras] = useState({});
   const [touched, setTouched] = useState(false);
+  const [extrasOk, setExtrasOk] = useState(false);
 
   const handleFoundationChange = (event) => {
     setFoundation(event.target?.value); 
@@ -61,6 +62,7 @@ function ComposeSalad(props) {
     const id = useId();
     return (
       <div className="mb-3">
+      <div className={touched ? "was-validated" : ""}>
         <label htmlFor={id} className="form-label">{label}</label>
         <select required value={value} onChange={onChange} className="form-select" id={id}>
           <option value="">Gör ditt val</option>
@@ -68,6 +70,7 @@ function ComposeSalad(props) {
         </select>
         <div className="invalid-feedback">Välj en av ingredienserna</div>
         <div className="valid-feedback">Korrekt</div>
+      </div>
       </div>
     );
   }
@@ -77,7 +80,18 @@ function ComposeSalad(props) {
 
     setTouched(true);
 
-    if(event.target.checkValidity()){
+
+    setExtrasOk(false);
+
+    console.log("innan");
+    if(extras.length < 10 && extras.length > 2 ){
+      console.log("inuti");
+      setExtrasOk(true);
+      console.log(extrasOk);
+    }
+    console.log("efter");
+
+    if(event.target.checkValidity() && extrasOk){
        let mySalad = new Salad()
        .add(foundation, inventory[foundation])
        .add(protein, inventory[protein])
@@ -94,8 +108,7 @@ function ComposeSalad(props) {
 
      setTouched("");
 
-     navigate("/view-order");
-
+     navigate("/view-order/confirm/" + mySalad.uuid);
     }
 
   };
@@ -123,7 +136,7 @@ function ComposeSalad(props) {
     
       <div className="row h-200 p-5 bg-light border rounded-3">
         <h2>Välj innehållet i din sallad</h2>
-        <form noValidate onSubmit={handleSubmit} className={touched ? "was-validated" : ""}>
+        <form noValidate onSubmit={handleSubmit}>
 
           <Select label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
 
@@ -131,7 +144,7 @@ function ComposeSalad(props) {
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
-            <div className="row">
+            <div className={"row" + extrasOk ? "was-validated": "is-invalid"}>
               {extraList.map(extra => (
                 <div key={extra} className="col-12 col-md-4 col-lg-3 mb-2">
                   <input
@@ -148,10 +161,12 @@ function ComposeSalad(props) {
                 </div>
               ))}
             </div>
+
+            
+
           </div>
 
           <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
-
 
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
           <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Ceasarsallad 50kr" onClick={ceasarSallad}></input>

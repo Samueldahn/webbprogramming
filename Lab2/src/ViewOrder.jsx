@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { useOutletContext } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function ViewOrder(props) {
   const { shoppingCart, emptyShoppingCart } = useOutletContext();
+  const { uuid } = useParams();
   
     if (shoppingCart.length === 0){
         return(
@@ -24,18 +26,23 @@ function ViewOrder(props) {
             const price = salad.getPrice();
 
             return (
-        
               <div className="mb-3 fs-10 border centered rounded bg-white " key={salad.uuid}>
                 <p>{ingredients + ", pris: " + price + "kr"}</p>
               </div>
       
             );
-            
           })}
 
           <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={emptyShoppingCart}></input>
 
         </div>
+
+        {uuid && (
+          <div className="mt-4">
+            <p>Din sallad med id: {uuid} har lagts till i varukorgen.</p>
+          </div>
+        )}
+
       </div>
     )
 
