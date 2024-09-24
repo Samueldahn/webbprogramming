@@ -27,6 +27,9 @@ Yes you can through using useEffect, with the code for calculating foundations
 inside of the useEffect function (which will be called after each render).
 You would put [props.inventory] in the "end" of the return.
 
+OBS: från handledning arrayn i slutet (dependancies) är det som bestämmer om
+useEffect eller useMemo ska beräkna. Alltså körs bara den koden vid förädndring.
+
 Part 2:
 It does not seem to be nessecary as it can be inefficient. React can do double
 the work as it updates it after state update and after render, potentially
@@ -58,12 +61,16 @@ the state of your component?
 A:
 No. It does not change the state of the component unless you have event handelers.
 
+ANVÄND ALDRIG useRef --> okontrollerad
+
 Reflection question 6 ----------------------------------------------------------
 Q:
 What is the value of this in the event handling call-back functions?
 
 A:
 this in event handeling call-back functions will be event.currentTarget
+
+Använd inte this!!! OM INTE MAN ANVÄNDER BIND!
 
 Reflection question 7 ----------------------------------------------------------
 Q:
