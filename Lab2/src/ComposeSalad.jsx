@@ -29,9 +29,9 @@ function ComposeSalad(props) {
     </option>
   ));
 
-  const [foundation, setFoundation] = useState("Sallad");
-  const [protein, setProtein] = useState("Kycklingfilé");
-  const [dressing, setDressing] = useState("Ceasardressing");
+  const [foundation, setFoundation] = useState("");
+  const [protein, setProtein] = useState("");
+  const [dressing, setDressing] = useState("");
   const [extras, setExtras] = useState({});
 
   const handleFoundationChange = (event) => {
@@ -59,6 +59,7 @@ function ComposeSalad(props) {
       <div className="mb-3">
         <label htmlFor={id} className="form-label">{label}</label>
         <select value={value} onChange={onChange} className="form-select" id={id}>
+          <option value="">Gör ditt val</option>
           {options}
         </select>
       </div>
@@ -110,9 +111,9 @@ function ComposeSalad(props) {
         <h2>Välj innehållet i din sallad</h2>
         <form className="col-md-12" onSubmit={handleSubmit}>
 
-          <Select label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
+          <Select required label="Välj bas" value={foundation} onChange={handleFoundationChange} options={foundationList}/>
           
-          <Select label="Välj protein" value={protein} onChange={handleProteinChange} options={proteinList}/>
+          <Select required label="Välj protein" value={protein} onChange={handleProteinChange} options={proteinList}/>
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
@@ -135,7 +136,7 @@ function ComposeSalad(props) {
             </div>
           </div>
 
-          <Select label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
+          <Select required label="Välj dressing" value={dressing} onChange={handleDressingChange} options={dressingList}/>
 
 
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
