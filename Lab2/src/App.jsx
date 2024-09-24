@@ -4,6 +4,7 @@ import ComposeSalad from './ComposeSalad';
 import ViewOrder from './ViewOrder';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -24,12 +25,12 @@ function App() {
         <img style={{ width: '100px', height: '100px'}} src="https://www.grontogott.se/wp-content/uploads/2020/07/cropped-logo.png" alt="Chill och snabbt logo"/>
         <span className="fs-1 align-middle">Chill och snabbt</span>
       </header>
-
-      <Outlet context={{ inventory, addSalad, shoppingCart }} />
+      <Navbar />
+      <Outlet context={{ inventory, addSalad, shoppingCart, emptyShoppingCart }} />
       
       {/* <ViewOrder shoppingCart={shoppingCart} emptyShoppingCart={emptyShoppingCart}></ViewOrder>
 
-      <ComposeSalad inventory={inventory} onSubmit={addSalad} ></ComposeSalad> */}
+      <ComposeSalad inventory={inventory} addSalad={addSalad} ></ComposeSalad> */}
 
       <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering

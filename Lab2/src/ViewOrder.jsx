@@ -1,8 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
+import { useOutletContext } from 'react-router-dom';
 
 function ViewOrder(props) {
+  const { shoppingCart, emptyShoppingCart } = useOutletContext();
   
-    if (props.shoppingCart.length === 0){
+    if (shoppingCart.length === 0){
         return(
           <div className="container col-12 mb-5">
             <div className="row h-200 p-5 bg-light border rounded-3">
@@ -16,7 +18,7 @@ function ViewOrder(props) {
       <div className="container col-12 mb-5">
         <div className="row h-200 p-5 bg-light border rounded-3">
           <h2>Varukorgen</h2>
-          {props.shoppingCart.map((salad, index) => {
+          {shoppingCart.map((salad, index) => {
     
             const ingredients = Object.keys(salad.ingredients).join(', ');
             const price = salad.getPrice();
@@ -31,7 +33,7 @@ function ViewOrder(props) {
             
           })}
 
-          <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={props.emptyShoppingCart}></input>
+          <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={emptyShoppingCart}></input>
 
         </div>
       </div>

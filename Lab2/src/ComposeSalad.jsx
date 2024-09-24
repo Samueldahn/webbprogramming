@@ -2,28 +2,30 @@ import { useId } from 'react';
 import { useState } from 'react';
 import Salad from './Salad.mjs';
 import { useOutletContext } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function ComposeSalad(props) {
-  const inventoryKeys = Object.keys(props.inventory);
   const { inventory, addSalad } = useOutletContext();
+  const inventoryKeys = Object.keys(inventory);
+  const navigate = useNavigate();
   // const inventory = Object.entries(props.inventory);
 
-  const foundationList = inventoryKeys.filter(name => props.inventory[name].foundation).map(item => (
+  const foundationList = inventoryKeys.filter(name => inventory[name].foundation).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
   ));
 
-  const proteinList = inventoryKeys.filter(name => props.inventory[name].protein).map(item => (
+  const proteinList = inventoryKeys.filter(name => inventory[name].protein).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
   ));
 
-  const extraList = inventoryKeys.filter(name => props.inventory[name].extra)
+  const extraList = inventoryKeys.filter(name => inventory[name].extra)
 
-  const dressingList = inventoryKeys.filter(name => props.inventory[name].dressing).map(item => (
+  const dressingList = inventoryKeys.filter(name => inventory[name].dressing).map(item => (
     <option key={item} value={item}>
       {item}
     </option>
@@ -77,13 +79,13 @@ function ComposeSalad(props) {
 
     if(event.target.checkValidity()){
        let mySalad = new Salad()
-       .add(foundation, props.inventory[foundation])
-       .add(protein, props.inventory[protein])
-       .add(dressing, props.inventory[dressing]);
+       .add(foundation, inventory[foundation])
+       .add(protein, inventory[protein])
+       .add(dressing, inventory[dressing]);
  
-     Object.keys(extras).forEach(name => mySalad.add(name, props.inventory[name]));
+     Object.keys(extras).forEach(name => mySalad.add(name, inventory[name]));
      
-     props.onSubmit(mySalad);
+     addSalad(mySalad);
 
      setFoundation("");
      setProtein("");
@@ -91,6 +93,9 @@ function ComposeSalad(props) {
      setExtras({});
 
      setTouched("");
+
+     navigate("/view-order");
+
     }
 
   };
