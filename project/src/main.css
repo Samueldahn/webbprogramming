@@ -1,0 +1,66 @@
+:root {
+    --primary-color: #1a2f5e;  /* Dark blue from the logo */
+    --secondary-color: #e0a43c;  /* Gold color from the logo */
+    --text-color: #333;
+    --background-color: #fff;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+  }
+  
+  .navbar {
+    background-color: #867857 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-brand img {
+    max-height: 100px;
+  }
+  
+  .nav-link {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+    font-size: 25px !important; /* Adjust this value to change the font size */
+    transition: color 0.3s ease;
+  }
+  .nav-link:hover {
+    color: var(--secondary-color) !important;
+  }
+
+  .nav-link.active {
+    color: var(--secondary-color) !important;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+  }
+  
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .page-title {
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
