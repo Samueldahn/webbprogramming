@@ -39,7 +39,7 @@
     display: inline-block;
   }
   .nav-link:hover {
-    color: #ddb56f !important;
+    color: #ba9350 !important;
     transform: scale(1.15) translateY(-1px);
   }
 
