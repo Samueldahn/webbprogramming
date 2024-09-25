@@ -17,13 +17,13 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link>
+              <Link className={`nav-link me-3 ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname === '/about' ? 'active' : ''}`} to="/about">About</Link>
+              <Link className={`nav-link me-3 ${location.pathname === '/about' ? 'active' : ''}`} to="/about">About</Link>
             </li>
             <li className="nav-item">
-              <Link className={`nav-link ${location.pathname === '/contact' ? 'active' : ''}`} to="/contact">Contact</Link>
+              <Link className={`nav-link me-3 ${location.pathname === '/contact' ? 'active' : ''}`} to="/contact">Contact</Link>
             </li>
           </ul>
         </div>

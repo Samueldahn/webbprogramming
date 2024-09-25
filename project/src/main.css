@@ -35,10 +35,12 @@
     color: var(--primary-color) !important;
     font-weight: 500;
     font-size: 25px !important; /* Adjust this value to change the font size */
-    transition: color 0.3s ease;
+    transition: color 0.1s ease, transform 1.5s ease;
+    display: inline-block;
   }
   .nav-link:hover {
-    color: var(--secondary-color) !important;
+    color: #ddb56f !important;
+    transform: scale(1.15) translateY(-1px);
   }
 
   .nav-link.active {
