@@ -29,6 +29,11 @@
   
   .navbar-brand img {
     max-height: 85px;
+    transition: transform 0.5s ease;
+  }
+
+  .navbar-brand img:hover {
+    transform: scale(1.1);
   }
   
   .nav-link {
