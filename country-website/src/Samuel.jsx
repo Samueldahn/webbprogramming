@@ -50,7 +50,7 @@ function Samuel() {
             <Card.Header as="h2" className="custom-card-header">Courses</Card.Header>
             <Card.Body>
               <Row xs={1} md={2} lg={3}>
-                {['Innovation Management', 'Business Strategy', 'Data Analytics', 'Project Management', 'Entrepreneurship', 'Supply Chain Optimization'].map((course, index) => (
+                {['Supply Chain Management', 'Logistics and Operations', 'Risk Management in Global Supply Chains', 'Data-Driven Decision Making', 'Process Optimization', 'Sustainability in Supply Chains'].map((course, index) => (
                   <Col key={index} className="mb-3">
                     <Badge className="course-item">{course}</Badge>
                   </Col>
@@ -68,16 +68,16 @@ function Samuel() {
             <Card.Body>
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <h5>Innovative Business Model Canvas</h5>
-                  <p>Developed a novel approach to business model design, integrating sustainability and digital transformation aspects.</p>
+                  <h5>Supply Chain Risk Mitigation in Global Markets</h5>
+                  <p>Analyzed various strategies to mitigate risks in global supply chains, focusing on resilience during times of uncertainty.</p>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <h5>AI in Supply Chain Management</h5>
-                  <p>Researched and presented on the applications of artificial intelligence in optimizing supply chain operations.</p>
+                  <h5>Optimization of Resource Allocation in Food Production</h5>
+                  <p>Developed a detailed study on optimizing resource allocation in food supply chains, using bread production as a case study.</p>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <h5>Music Industry Disruption Analysis</h5>
-                  <p>Conducted a comprehensive analysis of how technology is reshaping the music industry, drawing from personal songwriting experience.</p>
+                  <h5>Sailing as a Model for Supply Chain Flow</h5>
+                  <p>Presented a research project that draws parallels between sailing techniques and supply chain optimization, highlighting the importance of balance, timing, and adaptability.</p>
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>
