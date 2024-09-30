@@ -12,7 +12,7 @@ function Samuel() {
         <Col>
           <h1 className="text-center mb-4">Samuel Dahn</h1>
           <div className="text-center mb-4">
-            <img src={samuelPhoto} alt="Arvid Malm" className="rounded-circle img-fluid personal-image" />
+            <img src={samuelPhoto} alt="Samuel Dahn" className="rounded-circle img-fluid personal-image" />
           </div>
           <p className="lead text-center">
             Salior, cooking genius, and aspiring supply chain expert pursuing a master's in Industrial Engineering and Management.
