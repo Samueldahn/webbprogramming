@@ -52,6 +52,16 @@ function Countryfinder(props) {
       return(
         <div></div>
       );
+    }else if(countryIds.length < 5){
+      return(
+      <Container className="py-5">
+        <div className="card h-100 shadow mb-5 bg-danger bg-gradient">
+            <div className="card-body ">
+              <p className="card-text"> <strong>Oops! We couldn't retrieve the information you requested. </strong> This may be due to a limit on the number of requests allowed from the Nationalize API, which is capped at 100 fetches a day. Please try again later or check your input. Thank you for your understanding!</p>
+            </div>
+        </div>
+      </Container>
+      )
     }
 
 
@@ -147,13 +157,12 @@ function Countryfinder(props) {
       <h1 className="page-title text-center mb-3">Country Finder</h1>
       <div className="card h-100 shadow m-5">
           <div className="card-body">
-            <p className="card-text">
-            Enter your name to find out which countries it's most common in. After searching, you'll see details like the country's name, capital, population, region, and flag. It’s a quick way to explore the origins and popularity of your name worldwide!</p>
+            <p className="card-text">Enter your name to find out which countries it's most common in. After searching, you'll see details like the country's name, capital, population, region, and flag. It’s a quick way to explore the origins and popularity of your name worldwide!</p>
           </div>
       </div>
       <h2 className="text-center fs-20">Input your name</h2>
 
-      <form noValidate onSubmit={handleSubmit}>
+      <form noValidate onSubmit={handleSubmit} className="mb-2">
         <input required type="text" id="nameInput" placeholder="Name" onChange={handleChange}></input>
 
         <input className="m-4 btn btn-primary" id="submit-name" type="submit" value="Search"></input>
