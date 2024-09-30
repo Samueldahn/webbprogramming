@@ -36,7 +36,12 @@ function Countryfinder() {
 
   function fetchCountryIdsAndProbs() {
     fetch(`https://api.nationalize.io/?name=${name}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`error code ` + response.status);
+          }
+        return response.json();
+    })
       .then((jsonOutput) => {
         if (jsonOutput.country && Array.isArray(jsonOutput.country)) {
           const countryIdsArray = jsonOutput.country.map((item) => item.country_id);
@@ -56,7 +61,12 @@ function Countryfinder() {
 
   function fetchCountryInfo(id) {
     return fetch(`https://restcountries.com/v3.1/alpha/${id}`)
-      .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`error code ` + response.status);
+        }
+      return response.json();
+    })
       .then((jsonOutput) => {
         if (jsonOutput && jsonOutput[0] && jsonOutput[0].name) {
           const countryData = {
