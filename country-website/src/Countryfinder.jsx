@@ -42,6 +42,11 @@ function Countryfinder(props) {
 
   }
 
+  function formatPopulation(population) {
+    // Convert population to a number and format it with spaces as thousands separators
+    return Number(population).toLocaleString('en-US').replace(/,/g, ' ');
+  }
+
   function printResults() {
     if(!submitted){
       return(
@@ -69,10 +74,13 @@ function Countryfinder(props) {
                       <strong>Official Name:</strong> {country.officialName}
                     </ListGroup.Item>
                     <ListGroup.Item>
+                    <strong>Probability of origin:</strong> {(countryProbs[index] * 100).toFixed(2)}%
+                  </ListGroup.Item>
+                    <ListGroup.Item>
                       <strong>Capital:</strong> {country.capital}
                     </ListGroup.Item>
                     <ListGroup.Item>
-                      <strong>Population:</strong> {country.population}
+                      <strong>Population:</strong> {formatPopulation(country.population)}
                     </ListGroup.Item>
                     <ListGroup.Item>
                       <strong>Region:</strong> {country.region}
