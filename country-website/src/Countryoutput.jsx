@@ -1,26 +1,11 @@
 import { Container, Row, Col, Card, ListGroup, Image, Spinner } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
 
 function Countryoutput(props) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [props.countryIds]);
-
   if (!props.submitted) {
     return <div></div>;
-  } else if (loading) {
+  }
+
+  if (props.loading) {
     return (
       <Container className="py-5">
         <Row className="justify-content-center">
@@ -30,8 +15,10 @@ function Countryoutput(props) {
           </Col>
         </Row>
       </Container>
-    ); 
-  } else if (props.countryIds.length < 5) {
+    );
+  }
+
+  if (props.countryIds.length < 5) {
     return (
       <Container className="py-5">
         <div className="card h-100 shadow mb-5 bg-danger bg-gradient">
