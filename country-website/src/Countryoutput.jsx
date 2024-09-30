@@ -16,7 +16,7 @@ function Countryoutput(props) {
     };
 
     fetchData();
-  }, []);
+  }, [props.countryIds]);
 
   if (!props.submitted) {
     return <div></div>;
