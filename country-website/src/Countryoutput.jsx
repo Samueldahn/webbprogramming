@@ -18,6 +18,11 @@ function Countryoutput(props) {
       )
     }
 
+    function formatPopulation(population) {
+      // Convert population to a number and format it with spaces as thousands separators
+      return Number(population).toLocaleString('en-US').replace(/,/g, ' ');
+    }
+
 
     return (
       <Container className="py-5">

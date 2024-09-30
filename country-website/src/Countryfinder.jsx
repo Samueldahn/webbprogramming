@@ -43,11 +43,6 @@ function Countryfinder(props) {
 
   }
 
-  function formatPopulation(population) {
-    // Convert population to a number and format it with spaces as thousands separators
-    return Number(population).toLocaleString('en-US').replace(/,/g, ' ');
-  }
-
   function fetchCountryIdsAndProbs() {
     fetch(`https://api.nationalize.io/?name=${name}`)
       .then((response) => response.json())
