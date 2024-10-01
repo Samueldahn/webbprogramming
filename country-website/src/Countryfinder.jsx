@@ -93,11 +93,11 @@ function Countryfinder() {
       <div className="card h-100 shadow m-5">
         <div className="card-body">
           <p className="card-text">
-            Enter your name to find out which countries it's most common in. After searching, you'll see details like the country's name, capital, population, region, and flag. It’s a quick way to explore the origins and popularity of your name worldwide!
+            Enter your last name to find out which countries it's most common in. After searching, you'll see details like the country's name, capital, population, region, and flag. It’s a quick way to explore the origins and popularity of your last name worldwide!
           </p>
         </div>
       </div>
-      <h2 className="text-center fs-20">Input your name</h2>
+      <h2 className="text-center fs-20">Input your last name</h2>
 
       <form noValidate onSubmit={handleSubmit} className="mb-2">
         <input required type="text" id="nameInput" placeholder="Name" onChange={handleChange} />
