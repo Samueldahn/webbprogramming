@@ -142,7 +142,7 @@ function ComposeSalad(props) {
 
           <div className="mb-3">
             <label className="form-label">Välj extra tillbehör</label>
-            <div className={`row ${touched && (extraCount >= 3 && extraCount <= 10) ? "was-validated is-valid" : "is-invalid"}`}>
+            <div className={`row ${touched && (extraCount >= 3 && extraCount <= 9) ? "was-validated is-valid" : "is-invalid"}`}>
               {extraList.map(extra => (
                 <div key={extra} className="col-12 col-md-4 col-lg-3 mb-2">
                   <input
