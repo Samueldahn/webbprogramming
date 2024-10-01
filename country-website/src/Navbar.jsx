@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import logo from "./assets/logo.png";
 
 function Navbar() {
@@ -14,16 +14,16 @@ function Navbar() {
             <div id="navbarNav">
                 <ul className="navbar-nav ms-auto">
                     <li>
-                        <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link>
+                        <NavLink className="nav-link" to="/">Home</NavLink>
                     </li>
                     <li>
-                        <Link className={`nav-link ${location.pathname === '/arvid' ? 'active' : ''}`} to="/arvid">Arvid</Link>
+                        <NavLink className="nav-link" to="/arvid">Arvid</NavLink>
                     </li>
                     <li>
-                        <Link className={`nav-link ${location.pathname === '/samuel' ? 'active' : ''}`} to="/samuel">Samuel</Link>
+                        <NavLink className="nav-link" to="/samuel">Samuel</NavLink>
                     </li>
                     <li>
-                        <Link className={`nav-link ${location.pathname === '/country-finder' ? 'active' : ''}`} to="/country-finder">Country-finder</Link>
+                        <NavLink className="nav-link" to="/country-finder">Country-finder</NavLink>
                     </li>
                 </ul>
             </div>

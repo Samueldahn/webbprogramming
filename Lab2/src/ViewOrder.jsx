@@ -37,6 +37,8 @@ function ViewOrder(props) {
 
         </div>
 
+        
+
         {uuid && (
           <div className="mt-4">
             <p>Din sallad med id: {uuid} har lagts till i varukorgen.</p>

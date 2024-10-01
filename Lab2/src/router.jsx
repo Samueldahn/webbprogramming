@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "confirm/:uuid",
-            Component: ViewOrder,
+            Component: ViewOrder, //OBS!! Detta ska vara en egen komponent med en egen outlet i ViewOrder
           },
         ],
 
