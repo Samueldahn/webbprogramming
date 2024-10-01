@@ -49,7 +49,7 @@ function ComposeSalad(props) {
   const handleExtraChange = (event) => {
     setExtras(prevExtras => ({
       ...prevExtras,
-      [event.target.name]: event.target.checked // Update the state of the selected extra
+      [event.target.name]: event.target.checked
     }));
 
     setExtraCount(prevCount => event.target.checked ? prevCount + 1 : prevCount - 1);
@@ -60,7 +60,7 @@ function ComposeSalad(props) {
   };
 
   
-  function Select({ label, value, onChange, options }) { //denna ska läggas separat i en annan fil och passa allt som props
+  function Select({ label, value, onChange, options }) {
     const id = useId();
     return (
       <div className="mb-3">
@@ -150,8 +150,8 @@ function ComposeSalad(props) {
                     className={`form-check-input ${touched && (extraCount < 3 || extraCount > 9) ? "is-invalid" : ""} ${touched && (extraCount >= 3 && extraCount <= 9) ? "is-valid" : ""}`}
                     id={extra}
                     name={extra}
-                    checked={extras[extra] || false} // Check if the extra is selected
-                    onChange={handleExtraChange} // Handle checkbox change
+                    checked={extras[extra] || false} 
+                    onChange={handleExtraChange}
                   />
                   <label htmlFor={extra} className="form-check-label">
                     {extra}
