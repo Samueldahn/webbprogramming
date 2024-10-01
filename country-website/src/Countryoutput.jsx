@@ -18,6 +18,21 @@ function Countryoutput(props) {
     );
   }
 
+  if (props.noCountriesFound) {
+    return (
+      <Container className="py-5">
+        <div className="card h-100 shadow mb-5 bg-danger bg-gradient">
+          <div className="card-body">
+            <p className="card-text">
+              <strong>Oops! We couldn't retrieve the information you requested. </strong>
+              The input is likely not a name appearing in the database. Please try another name.
+            </p>
+          </div>
+        </div>
+      </Container>
+    );
+  }
+
   if (props.countryIds.length < 5) {
     return (
       <Container className="py-5">

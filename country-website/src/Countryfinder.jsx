@@ -8,6 +8,8 @@ function Countryfinder() {
   const [countryProbs, setCountryProbs] = useState([]);
   const [countriesInfo, setCountriesInfo] = useState([]);
   const [loading, setLoading] = useState(false); 
+  const [noCountriesFound, setNoCountriesFound] = useState(false); 
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +19,7 @@ function Countryfinder() {
     setCountriesInfo([]);
     setSubmitted(true);
     setLoading(true);
+    setNoCountriesFound(false);
 
     fetchCountryIdsAndProbs();
   };
@@ -43,18 +46,20 @@ function Countryfinder() {
         return response.json();
     })
       .then((jsonOutput) => {
-        if (jsonOutput.country && Array.isArray(jsonOutput.country)) {
+        if ((jsonOutput.country && Array.isArray(jsonOutput.country)) && jsonOutput.country.length > 0) {
           const countryIdsArray = jsonOutput.country.map((item) => item.country_id);
           setCountryIds(countryIdsArray);
           const countryProbsArray = jsonOutput.country.map((item) => item.probability);
           setCountryProbs(countryProbsArray);
         } else {
           console.log("No country data found");
-          setLoading(false); 
+          setNoCountriesFound(true);
         }
       })
       .catch((error) => {
         console.error("Error fetching country data:", error);
+      })
+      .finally(() => {
         setLoading(false);
       });
   }
@@ -109,7 +114,8 @@ function Countryfinder() {
         loading={loading} 
         countryIds={countryIds} 
         countryProbs={countryProbs} 
-        countriesInfo={countriesInfo} 
+        countriesInfo={countriesInfo}
+        noCountriesFound={noCountriesFound} 
       />
     </div>
   );
