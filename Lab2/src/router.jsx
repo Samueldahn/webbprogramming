@@ -67,6 +67,7 @@ const promises = [
 ];
 
 async function inventoryLoader() {
+  try{
   const fetchedIngredients = await Promise.all(promises);
 
   const inventory = fetchedIngredients.reduce((acc, curr) => {
@@ -79,6 +80,10 @@ async function inventoryLoader() {
   
   await new Promise(resolve => setTimeout(resolve, 500));
   return inventory;
+  }catch (error){
+    console.error("Error loading inventory: ", error);
+    throw(error);
+  }
 }
 
 const router = createBrowserRouter([

@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
-// import inventory from './inventory.mjs';
-import ComposeSalad from './ComposeSalad';
-import ViewOrder from './ViewOrder';
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import Navbar from './Navbar';
+import BootstrapSpinner from './BootstrapSpinner';
+
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState([]);
@@ -18,6 +17,16 @@ function App() {
     setShoppingCart([]);
   };
 
+  function visablePage (){
+    if(useNavigation().state === 'loading'){
+      return (<BootstrapSpinner/>);
+      // return (BootstrapSpinner());
+    }
+
+    return (<Outlet context={{addSalad, shoppingCart, emptyShoppingCart }} />);
+
+  }
+
 
   return (
     <div className="container py-4" >
@@ -26,7 +35,7 @@ function App() {
         <span className="fs-1 align-middle">Chill och snabbt</span>
       </header>
       <Navbar />
-      <Outlet context={{addSalad, shoppingCart, emptyShoppingCart }} />
+      {visablePage()}
       
       {/* <ViewOrder shoppingCart={shoppingCart} emptyShoppingCart={emptyShoppingCart}></ViewOrder>
 
