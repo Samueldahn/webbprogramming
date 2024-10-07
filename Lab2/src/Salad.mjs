@@ -8,10 +8,9 @@ const names = Object.keys(inventory);
 
 
 function makeOptions(inv, prop) {
-  let invArray = Object.entries(inv); // Convert object to array
-
+  let invArray = Object.entries(inv); 
   return invArray
-  .filter(([key, entry]) => entry[prop] === true) // Check if the property exists and is true
+  .filter(([key, entry]) => entry[prop] === true) 
   .map(([key, entry]) => `<option value="${key}" key="${key}">${key}, ${entry.price} kr</option>`);
 }
 
@@ -39,10 +38,8 @@ class Salad {
   }
 
   static parse(json) {
-    // Parse the JSON string into an object
     let parsedData = JSON.parse(json);
     if (Array.isArray(parsedData)) {
-      // If it's an array of salads, parse each one and combine them
       let arrayOfSalads = new Array();
       parsedData.forEach(item => {
         let tempIngredients = item.ingredients;
@@ -52,7 +49,6 @@ class Salad {
       });
       return arrayOfSalads;
     } else {
-      // If it's a single salad object, parse it directly
       let tempIngredients = parsedData.ingredients;
       let id = parsedData.id;
       let uuid = parsedData.uuid;
@@ -77,15 +73,13 @@ class GourmetSalad extends Salad{
 
   add(name, properties, size = 1) {
     if (!this.ingredients[name]) {
-      // If the ingredient is not present, add it with the initial size
       let tempProps = {...properties};
       tempProps.size = size;
       super.add(name, tempProps);
     } else {
-      // If the ingredient is already present, update its size and properties
       let existing = {...this.ingredients[name]};
       existing.size = (existing.size || 1) + size;
-      super.add(name, existing);  // Update properties
+      super.add(name, existing); 
     }
     return this;
   }

@@ -23,22 +23,20 @@ async function fetchData(url, type) {
 
   const names = await response.json();
 
-  // Skapa ett sammansatt objekt med ingrediensnamn som nycklar
   const ingredients = await Promise.all(
     names.map(async (name) => {
       const ingredientOutput = await fetchIngredient(type, name);
-      return { name, ingredientOutput }; // Returnerar objekt med name och dess ingredientOutput
+      return { name, ingredientOutput }; 
     })
   );
 
-  // Konvertera arrayen till ett objekt där namnen är nycklar
   const ingredientObj = ingredients.reduce((acc, curr) => {
     acc[curr.name] = curr.ingredientOutput;
     return acc;
   }, {});
 
 
-  return ingredientObj; // Returnerar ett objekt med ingrediensnamn som nycklar
+  return ingredientObj; 
 }
 
 
@@ -55,11 +53,9 @@ async function inventoryLoader() {
   const fetchedIngredients = await Promise.all(promises);
 
   const inventory = fetchedIngredients.reduce((acc, curr) => {
-    return { ...acc, ...curr }; // Kombinerar varje objekt i arrayen till ett enda
+    return { ...acc, ...curr };
   }, {});
 
-  // Promise.all(promises).then(inventory = {...})
-  // const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
   
   await new Promise(resolve => setTimeout(resolve, 0));
   return inventory;

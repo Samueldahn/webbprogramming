@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Import Bootstrap JS
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function ConfirmOrder({ confirmations }) {
     useEffect(() => {
         const toastElList = document.querySelectorAll('.toast');
         toastElList.forEach(toastEl => {
             const toast = new bootstrap.Toast(toastEl);
-            toast.show(); // Show the toast
+            toast.show(); 
         });
-    }, [confirmations]); // Re-run when `confirmations` changes
+    }, [confirmations]);
 
     if (!confirmations || confirmations.length === 0) {
-        return <div>No orders confirmed yet.</div>;
+        return <div></div>;
     }
 
     return (

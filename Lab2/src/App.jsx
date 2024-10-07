@@ -26,8 +26,8 @@ function App() {
   const addSalad = (newSalad) => {
     setShoppingCart((prevShoppingCart) => {
       const updatedCart = [...prevShoppingCart, newSalad];
-      localStorage.setItem("shoppingCart", JSON.stringify(updatedCart)); // Save updated cart to localStorage
-      return updatedCart; // Return the updated state
+      localStorage.setItem("shoppingCart", JSON.stringify(updatedCart)); 
+      return updatedCart; 
     });
   };
 
@@ -40,26 +40,23 @@ function App() {
 
   const helpingPlaceOrder = async (stringSalad) => {
     try {
-      // Skicka POST-anropet
       const response = await fetch('http://localhost:8080/orders/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: stringSalad, // Skickar ingredienslistan som en JSON-sträng
+        body: stringSalad, 
       });
 
-      // Kontrollera om anropet lyckades
       if (!response.ok) {
         throw new Error(`Servern svarade med status ${response.status}`);
       }
 
-      // Returnera svaret som JSON för att uppdatera confirmations
       return await response.json();
       
     } catch (error) {
       console.error('Error placing order:', error);
-      return { error: 'Failed to place order' }; // Hantering av fel
+      return { error: 'Failed to place order' }; 
     }
   };
 
@@ -71,7 +68,7 @@ function App() {
     for (const salad of shoppingCart) {
       const stringSalad = JSON.stringify([Object.keys(salad.ingredients)]);
 
-      const result = await helpingPlaceOrder(stringSalad); // Wait for the order to be placed
+      const result = await helpingPlaceOrder(stringSalad); 
       if (result && result.status) {
           setConfirmations((prevConfirmations) => [...prevConfirmations, result]);
       }
