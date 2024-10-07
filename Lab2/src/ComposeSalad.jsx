@@ -3,13 +3,13 @@ import { useState } from 'react';
 import Salad from './Salad.mjs';
 import { useOutletContext } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { useLoaderData } from 'react-router-dom';
 
 function ComposeSalad(props) {
-  const { inventory, addSalad } = useOutletContext();
-  const inventoryKeys = Object.keys(inventory);
+  const {addSalad } = useOutletContext();
   const navigate = useNavigate();
-  // const inventory = Object.entries(props.inventory);
+  const inventory = useLoaderData();
+  const inventoryKeys = Object.keys(inventory);
 
   const foundationList = inventoryKeys.filter(name => inventory[name].foundation).map(item => (
     <option key={item} value={item}>

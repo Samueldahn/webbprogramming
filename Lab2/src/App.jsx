@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css'
-import inventory from './inventory.mjs';
+// import inventory from './inventory.mjs';
 import ComposeSalad from './ComposeSalad';
 import ViewOrder from './ViewOrder';
 import { useState } from 'react';
@@ -26,7 +26,7 @@ function App() {
         <span className="fs-1 align-middle">Chill och snabbt</span>
       </header>
       <Navbar />
-      <Outlet context={{ inventory, addSalad, shoppingCart, emptyShoppingCart }} />
+      <Outlet context={{addSalad, shoppingCart, emptyShoppingCart }} />
       
       {/* <ViewOrder shoppingCart={shoppingCart} emptyShoppingCart={emptyShoppingCart}></ViewOrder>
 
