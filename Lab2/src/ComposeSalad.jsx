@@ -169,7 +169,7 @@ function ComposeSalad(props) {
 
           <input className="mt-4 btn btn-primary" id="order" type="submit" value="Lägg till sallad i varukorg"></input>
           <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Ceasarsallad 50kr" onClick={ceasarSallad}></input>
-          <input className="mt-4 btn btn-secondary" id="ceasar" type="button" value="Återställ" onClick={resetChoices}></input>
+          <input className="mt-4 btn btn-secondary" id="reset" type="button" value="Återställ" onClick={resetChoices}></input>
 
         </form>
 

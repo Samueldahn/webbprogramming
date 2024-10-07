@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from './App';
 import ComposeSalad from "./ComposeSalad";
 import ViewOrder from "./ViewOrder";
+import ConfirmOrder from "./ConfirmOrder";
 
 
 async function fetchIngredient(ingredentType, ingredientName){
@@ -12,23 +13,6 @@ async function fetchIngredient(ingredentType, ingredientName){
   }
   return response.json(); 
 }
-
-// async function fetchData(url, type) {
-//   return fetch(url)
-//   .then(response => {
-//   if(!response.ok) {
-//     throw new Error(`${url} returned status ${response.status}`);
-//   }
-//   return response.json();
-  
-//   }).then((response) => {
-//     response.map(async (name) => {
-//       const ingredientOutput = await fetchIngredient(type, name);
-//       return {name: ingredientOutput};
-//     })
-//     return response;
-//   });
-// }
 
 async function fetchData(url, type) {
   const response = await fetch(url);
@@ -74,11 +58,10 @@ async function inventoryLoader() {
     return { ...acc, ...curr }; // Kombinerar varje objekt i arrayen till ett enda
   }, {});
 
-  console.log(inventory);
   // Promise.all(promises).then(inventory = {...})
   // const inventory = { Sallad: { price: 10, foundation: true, vegan: true } };
   
-  await new Promise(resolve => setTimeout(resolve, 500));
+  await new Promise(resolve => setTimeout(resolve, 0));
   return inventory;
   }catch (error){
     console.error("Error loading inventory: ", error);

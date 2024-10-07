@@ -1,29 +1,99 @@
 import 'bootstrap/dist/css/bootstrap.css'
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useState } from 'react';
 import { Outlet, useNavigate, useNavigation } from 'react-router-dom';
 import Navbar from './Navbar';
 import BootstrapSpinner from './BootstrapSpinner';
+import ConfirmOrder from './ConfirmOrder';
+import Salad from './Salad.mjs'
 
 
 function App() {
-  const [shoppingCart, setShoppingCart] = useState([]);
+  const navigation = useNavigation();
+  const navigate = useNavigate();
+  const [confirmations, setConfirmations] = useState([]);
+
+  const getShoppingCartFromLS = () => {
+    if(localStorage.getItem("shoppingCart")){
+      return Salad.parse(localStorage.getItem("shoppingCart"));
+    }
+    return [];
+  }
+
+  const [shoppingCart, setShoppingCart] = useState(getShoppingCartFromLS());
+
 
   const addSalad = (newSalad) => {
-    setShoppingCart((prevShoppingCart) => [...prevShoppingCart, newSalad]);
+    setShoppingCart((prevShoppingCart) => {
+      const updatedCart = [...prevShoppingCart, newSalad];
+      localStorage.setItem("shoppingCart", JSON.stringify(updatedCart)); // Save updated cart to localStorage
+      return updatedCart; // Return the updated state
+    });
   };
 
   const emptyShoppingCart = (event) => {
     event.preventDefault();
     setShoppingCart([]);
+    localStorage.removeItem("shoppingCart");
+    };
+
+
+  const helpingPlaceOrder = async (stringSalad) => {
+    try {
+      // Skicka POST-anropet
+      const response = await fetch('http://localhost:8080/orders/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: stringSalad, // Skickar ingredienslistan som en JSON-sträng
+      });
+
+      // Kontrollera om anropet lyckades
+      if (!response.ok) {
+        throw new Error(`Servern svarade med status ${response.status}`);
+      }
+
+      // Returnera svaret som JSON för att uppdatera confirmations
+      return await response.json();
+      
+    } catch (error) {
+      console.error('Error placing order:', error);
+      return { error: 'Failed to place order' }; // Hantering av fel
+    }
+  };
+
+  const placeOrder = async (event) => {
+    event.preventDefault();
+
+    setConfirmations([]);
+
+    for (const salad of shoppingCart) {
+      const stringSalad = JSON.stringify([Object.keys(salad.ingredients)]);
+
+      const result = await helpingPlaceOrder(stringSalad); // Wait for the order to be placed
+      if (result && result.status) {
+          setConfirmations((prevConfirmations) => [...prevConfirmations, result]);
+      }
+  }
+
+    console.log(confirmations);
+
+    const toastElList = document.querySelectorAll('.toast');
+    toastElList.forEach(toastEl => {
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    });
+    setShoppingCart([]);
+    localStorage.removeItem("shoppingCart");
+
   };
 
   function visablePage (){
-    if(useNavigation().state === 'loading'){
+    if(navigation.state === 'loading'){
       return (<BootstrapSpinner/>);
-      // return (BootstrapSpinner());
     }
-
-    return (<Outlet context={{addSalad, shoppingCart, emptyShoppingCart }} />);
+    return (<Outlet context={{addSalad, shoppingCart, emptyShoppingCart, placeOrder }} />);
 
   }
 
@@ -36,10 +106,9 @@ function App() {
       </header>
       <Navbar />
       {visablePage()}
-      
-      {/* <ViewOrder shoppingCart={shoppingCart} emptyShoppingCart={emptyShoppingCart}></ViewOrder>
 
-      <ComposeSalad inventory={inventory} addSalad={addSalad} ></ComposeSalad> */}
+      <ConfirmOrder confirmations={confirmations}/>
+
 
       <footer className="pt-3 mt-4 text-muted border-top">
         EDAF90 - webprogrammering

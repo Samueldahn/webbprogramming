@@ -3,7 +3,7 @@ import { useOutletContext } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
 function ViewOrder(props) {
-  const { shoppingCart, emptyShoppingCart } = useOutletContext();
+  const { shoppingCart, emptyShoppingCart, placeOrder } = useOutletContext();
   const { uuid } = useParams();
   
     if (shoppingCart.length === 0){
@@ -34,7 +34,7 @@ function ViewOrder(props) {
           })}
 
           <input className="mt-4 btn btn-secondary" id="clear" type="button" value="Töm varukorgen" onClick={emptyShoppingCart}></input>
-
+          <input className="mt-4 btn btn-secondary" id="order" type="button" value="Beställ" onClick={placeOrder}></input>
         </div>
 
         
