@@ -1,0 +1,8 @@
+Reflection question 1 ----------------------------------------------------------
+Q: Reflection question: What is the difference between <BootstrapSpinner /> and {BootstrapSpinner()}
+when using the bootstrap spinner component in a JSX expression?
+
+
+A: By using {BootstrapSpinner()} we bypass react internal functions such as using hooks and states etc. When instead using
+ <BootstrapSpinner /> we let react pass props correctly and managing lifecycle.
+
