@@ -57,7 +57,7 @@ async function inventoryLoader() {
   }, {});
 
   
-  await new Promise(resolve => setTimeout(resolve, 0));
+  await new Promise(resolve => setTimeout(resolve, 500));
   return inventory;
   }catch (error){
     console.error("Error loading inventory: ", error);
