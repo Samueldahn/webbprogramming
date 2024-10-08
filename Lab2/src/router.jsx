@@ -21,7 +21,7 @@ async function fetchData(url, type) {
     throw new Error(`${url} returned status ${response.status}`);
   }
 
-  const names = await response.json();
+  const names = await response.json(); //await blir samma som then men du slipper ha ett then-block. async gör bara ett promise. async/await är samma som then/catch. async/await nyare - 2007 och "bättre"
 
   const ingredients = await Promise.all(
     names.map(async (name) => {
@@ -41,14 +41,15 @@ async function fetchData(url, type) {
 
 
 
-const promises = [
-  fetchData("http://localhost:8080/foundations/", "foundations"),
-  fetchData("http://localhost:8080/proteins/", "proteins"),
-  fetchData("http://localhost:8080/extras/", "extras"),
-  fetchData("http://localhost:8080/dressings/", "dressings"),
-];
 
 async function inventoryLoader() {
+  const promises = [
+    fetchData("http://localhost:8080/foundations/", "foundations"),
+    fetchData("http://localhost:8080/proteins/", "proteins"),
+    fetchData("http://localhost:8080/extras/", "extras"),
+    fetchData("http://localhost:8080/dressings/", "dressings"),
+  ];
+
   try{
   const fetchedIngredients = await Promise.all(promises);
 

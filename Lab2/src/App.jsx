@@ -15,12 +15,12 @@ function App() {
 
   const getShoppingCartFromLS = () => {
     if(localStorage.getItem("shoppingCart")){
-      return Salad.parse(localStorage.getItem("shoppingCart"));
+      return Salad.parse(localStorage.getItem("shoppingCart")); //hade kunnat ha felhantering
     }
     return [];
   }
 
-  const [shoppingCart, setShoppingCart] = useState(getShoppingCartFromLS());
+  const [shoppingCart, setShoppingCart] = useState(getShoppingCartFromLS);
 
 
   const addSalad = (newSalad) => {
